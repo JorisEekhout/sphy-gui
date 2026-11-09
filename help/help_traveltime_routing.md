@@ -1,0 +1,10 @@
+# Travel time routing
+
+By using the travel time routing algorithm the model can determine the flow velocity and water depth in the channels, which can be used to determine several output options, such as the inundation frequency, but can also be used to enable more advanced sediment transport equations and simulate channel morphodynamics. A channel hillslope map should be provided, where 1 indicates a channel cell and 2 a hillslope cell. The channel width, channel depth, channel roughness, floodplain width and floodplain roughness should be provided for the channel cells. This can either be maps or single values. The minimum rill width, maximum rill width and rill roughness should be provided for the hillslope cells, where the rill roughness can be a single value or a map. 
+
+The travel time algorithm includes several parameters that determine the accuracy of the hydraulic processes. This includes a parameter to adjust the channel smoothing algorithm. A value of 20 gave satisfactory results in a case study in Southeast Spain. The travel time algorithm makes use of a iteration to determine the discharge. The speed of the algorithm can be adjusted with a discharge threshold and a maximum number of iterations. A higher discharge threshold and a smaller maximum number of iterations will increase the speed of the calculation, but will reduce the accuracy. To determine the inundation frequency an inundation threshold can be defined. Below this threshold the model does not consider inundation to occur. 
+
+See Eekhout et al. (2024) for more details on the implementation and a case study.
+
+# References
+Eekhout, J.P.C., Jódar-Abellán, A., Carrillo-López, E., Boix-Fayos, C., De Vente, J., 2024. [Assessing the hillslope-channel contributions to the catchment sediment balance under climate change](https://doi.org/10.1016/j.envsoft.2023.105890). Environmental Modelling & Software 171, 105890. 

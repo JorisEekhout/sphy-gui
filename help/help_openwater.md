@@ -1,0 +1,3 @@
+# Open water evaporation
+
+Open water evaporation can be determined only when the reservoir module is used. To use the open water evaporation algorithm, Enable Open Water Evaporation should be activated. The kc-value of open water evaporation should be provided, for which a value of 1.2 is commonly used. Finally, a map should be provided with the fraction per cell occupied by open water, in which each water body covers at least a reservoir ID map. The latter is important for the calculation of the changes in reservoir volume based on the open water evaporation estimates. The map is also used to partly switch-off the soil-water processes in the corresponding cells, depending on the fraction of the cell occupied by open water.

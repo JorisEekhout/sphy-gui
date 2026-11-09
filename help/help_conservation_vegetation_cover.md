@@ -1,0 +1,13 @@
+# Vegetation cover
+
+Vegetation cover can simulate, for instance, cover crops and buffer strips. A map should be provided with the locations where vegetation cover are being applied. Each different vegetation cover should get a different value, in a similar way as with the land use map. The other cells should get a value of 0 or missing value. 
+
+The vegetation characteristics should be provided in the vegetation cover table. Each ID as defined in the vegetation cover map should get a seperate line in this table. A sowing-harvest cycle can be simulated by providing the **Sowing** and **Harvest** dates as day of the year (julian dates). In case no sowing-harvest cycle should be simulated, **Sowing** and **Harvest** should be set to 1 and 366, respectively. The **Plant height**, **Stem density (NV)**, **Stem diameter (D)** and **Ground cover (GC)** should be defined in case the MMF soil erosion model is used in the Erosion module. See the Erosion tab for more information on these vegetation characteristics. In the **Strip** column it should be indicated if the vegetation cover is applied in strips (1) or if it covers the entire cell (0). Under **Land use class** can be indicated if the vegetation cover that covers the entire cell (strips = 0) correspond to an existing land use class. In that case, the value of that land use class should be provided, which is subsequently used to determine the average NDVI from that land use class. The average NDVI from that land use class will be used in case it is larger than the present NDVI value of the cell where the vegetation cover is applied. For example, a vegetation cover is being applied using cereals cover crops in rainfed tree crops. When the land use class of cereals is indicated under **Land use class**, then the average NDVI for the existing cereal cells from the land use map will be determined. The average NDVI for cereals will be used in case this NDVI value is larger than the existing NDVI of rainfed tree crops. The NDVI will only be applied within the sowing-harvest cycle.
+
+**Table 1: Vegetation cover table**
+
+| ID | Sowing | Harvest | Plant height (PH) | Stem density (NV) | Stem diameter (D) | Ground cover (GC) | Strip | Land use class |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| -99 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+| 1 | value1 | value2 | value3 | value4 | value5 | value6 | value7 | value8 |
+| etc | etc | etc | etc | etc | etc | etc | etc | etc |

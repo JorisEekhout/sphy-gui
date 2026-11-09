@@ -1,0 +1,8 @@
+# Installer Build Folders & Releases
+SPHY_Installer_Build/
+Releases/
+*.exe
+
+# Temp and assets
+assets/
+tmp/

@@ -1,0 +1,2437 @@
+tabs:
+  general:
+    label: "General"
+    parameters:
+      - name: folders
+        type: group_box
+        label: Folders
+        parameters:
+        - name: "inputdir"
+          section: "DIRS"
+          label: "Input Folder"
+          type: "file_input"
+          path_style: "full"
+          file_mode: "Directory"
+          default: "input/"
+
+        - name: "outputdir"
+          section: "DIRS"
+          label: "Output Folder"
+          type: "file_input"
+          path_style: "full"
+          file_mode: "Directory"
+          default: "output/"
+      
+      - name: timing
+        type: group_box
+        label: Dates
+        parameters:
+        - name: "start_date"
+          section: "TIMING"
+          label: "Start Date"
+          type: "date_input"
+          params:
+            year_name: "startyear"
+            month_name: "startmonth"
+            day_name: "startday"
+          default: [2024, 1, 1] # [Year, Month, Day]
+
+        - name: "end_date"
+          section: "TIMING"
+          label: "End Date"
+          type: "date_input"
+          params:
+            year_name: "endyear"
+            month_name: "endmonth"
+            day_name: "endday"
+          default: [2025, 12, 31] # [Year, Month, Day]
+
+        - name: "spinupyears"
+          section: "TIMING"
+          label: "Spin-up Years"
+          type: "integer_input"
+          default: 1
+
+      - name: general_maps
+        type: group_box
+        label: Maps
+        parameters:
+        - name: "mask"
+          section: "GENERAL"
+          label: "Clone Map"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          default: "clone.map"
+
+        - name: "dem"
+          section: "GENERAL"
+          label: "Digital Elevation Model"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          default: "dem.map"
+
+        - name: "Slope"
+          section: "GENERAL"
+          label: "Slope Map"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          default: "slope.map"
+
+        - name: "locations"
+          section: "GENERAL"
+          label: "Stations Map"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          default: "stations.map"
+
+        - name: "LandUse"
+          section: "LANDUSE"
+          label: "Land Use Map"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          default: "landuse.map"
+
+  reporting:
+    label: "Reporting"
+    parameters:
+        - name: reporting_table
+          help_id: help_reporting
+          type: group_box
+          label: Reporting Table
+          parameters:
+          - name: "RepTab"
+            section: "REPORTING"
+            label: "Reporting Table"
+            type: "file_input"
+            path_style: "relative"
+            extension: "*.csv"
+            default: "reporting.csv"
+
+        - name: timeseries_reporting
+          type: group_box
+          label: Time Series in mm
+          parameters:
+          - name: "mm_rep_FLAG"
+            section: "REPORTING"
+            label: "Report Time Series in Subcatchments"
+            type: "flag"
+            default: false
+
+          - name: "QTOT_mm_FLAG"
+            section: "REPORTING"
+            depends_on: "mm_rep_FLAG"
+            label: "Total Runoff Time Series in mm"
+            type: "flag"
+            default: false
+
+          - name: "QROOTR_mm_FLAG"
+            section: "REPORTING"
+            depends_on: "mm_rep_FLAG"
+            label: "Surface Runoff Time Series in mm"
+            type: "flag"
+            default: false
+
+          - name: "QROOTD_mm_FLAG"
+            section: "REPORTING"
+            depends_on: "mm_rep_FLAG"
+            label: "Rootzone Runoff Time Series in mm"
+            type: "flag"
+            default: false
+
+          - name: "QRAIN_mm_FLAG"
+            section: "REPORTING"
+            depends_on: "mm_rep_FLAG"
+            label: "Rain Runoff Time Series in mm"
+            type: "flag"
+            default: false
+
+          - name: "QSUBSURF_mm_FLAG"
+            section: "REPORTING"
+            depends_on: "mm_rep_FLAG"
+            label: "Subsurface Runoff Time Series in mm"
+            type: "flag"
+            default: false
+
+          - name: "QBASE_mm_FLAG"
+            section: "REPORTING"
+            depends_on: "mm_rep_FLAG"
+            label: "Base Flow Runoff Time Series in mm"
+            type: "flag"
+            default: false
+
+          - name: "QSNOW_mm_FLAG"
+            section: "REPORTING"
+            depends_on: "mm_rep_FLAG"
+            label: "Snow Runoff Time Series in mm"
+            type: "flag"
+            default: false
+
+          - name: "GMelt_mm_FLAG"
+            section: "REPORTING"
+            depends_on: "mm_rep_FLAG"
+            label: "Snow Melt Runoff Time Series in mm"
+            type: "flag"
+            default: false
+
+          - name: "QGLAC_mm_FLAG"
+            section: "REPORTING"
+            depends_on: "mm_rep_FLAG"
+            label: "Glacier Runoff Time Series in mm"
+            type: "flag"
+            default: false
+
+          - name: "Prec_mm_FLAG"
+            section: "REPORTING"
+            depends_on: "mm_rep_FLAG"
+            label: "Precipitation Time Series in mm"
+            type: "flag"
+            default: false
+
+          - name: "ETa_mm_FLAG"
+            section: "REPORTING"
+            depends_on: "mm_rep_FLAG"
+            label: "Actual ET Time Series in mm"
+            type: "flag"
+            default: false
+
+          - name: "Seep_mm_FLAG"
+            section: "REPORTING"
+            depends_on: "mm_rep_FLAG"
+            label: "Seepage Time Series in mm"
+            type: "flag"
+            default: false
+
+          - name: "wbal_TSS_FLAG"
+            section: "REPORTING"
+            depends_on: "mm_rep_FLAG"
+            label: "Water Balance Time Series in mm"
+            type: "flag"
+            default: false
+
+        - name: lake_reservoir_reporting
+          type: group_box
+          label: Lake and Reservoir
+          parameters:
+          - name: "Lake_wbal"
+            section: "REPORTING"
+            depends_on: "LakeFLAG"
+            label: "Lake Water Balance Time Series in mm"
+            type: "flag"
+            default: false
+
+          - name: "Res_wbal"
+            section: "REPORTING"
+            depends_on: "ResFLAG"
+            label: "Reservoir Water Balance Time Series in mm"
+            type: "flag"
+            default: false
+
+  soil_maps:
+    label: "Soil Maps"
+    parameters:
+      - name: soil_hydraulic_properties
+        type: group_box
+        help_id: help_soil_hydraulic_properties
+        label: Soil Hydraulic Properties
+        parameters:
+        - name: "RootFieldMap"
+          section: "SOIL"
+          label: "Field Capacity Rootzone Map"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          default: "root_field.map"
+
+        - name: "RootSatMap"
+          section: "SOIL"
+          label: "Saturated Water Content Rootzone Map"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          default: "root_sat.map"
+
+        - name: "RootDryMap"
+          section: "SOIL"
+          label: "Permanent Wilting Point Rootzone Map"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          default: "root_dry.map"
+
+        - name: "RootWiltMap"
+          section: "SOIL"
+          label: "Wilting Point Rootzone Map"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          default: "root_wilt.map"
+
+        - name: "RootKsat"
+          section: "SOIL"
+          label: "Saturated Hydraulic Conductivity Rootzone Map"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          default: "root_ksat.map"
+
+        - name: "SubFieldMap"
+          section: "SOIL"
+          label: "Field Capacity Subsoil Map"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          default: "sub_field.map"
+
+        - name: "SubSatMap"
+          section: "SOIL"
+          label: "Saturated Water Content Subsoil Map"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          default: "sub_sat.map"
+
+        - name: "SubKsat"
+          section: "SOIL"
+          label: "Saturated Hydraulic Conductivity Subsoil Map"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          default: "sub_ksat.map"
+
+      - name: soil_hydraulic_properties
+        type: group_box
+        label: Soil Hydraulic Properties
+        parameters:
+        - name: "PedotransferFLAG"
+          section: "PEDOTRANSFER"
+          label: "Enable Pedotransfer Utility"
+          type: "flag"
+          default: false
+          controls:
+            checked:
+              disable: 
+                - "RootFieldMap"
+                - "RootSatMap"
+                - "RootDryMap"
+                - "RootWiltMap"
+                - "RootKsat"
+                - "SubFieldMap"
+                - "SubSatMap"
+                - "SubKsat"
+            unchecked:
+              enable: 
+                - "RootFieldMap"
+                - "RootSatMap"
+                - "RootDryMap"
+                - "RootWiltMap"
+                - "RootKsat"
+                - "SubFieldMap"
+                - "SubSatMap"
+                - "SubKsat"
+
+        - name: "RootSandMap"
+          section: "PEDOTRANSFER"
+          label: "Sand Rootzone (%)"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          default: "root_sand.map"
+          depends_on: "PedotransferFLAG"
+
+        - name: "RootClayMap"
+          section: "PEDOTRANSFER"
+          label: "Clay Rootzone (%)"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          default: "root_clay.map"
+          depends_on: "PedotransferFLAG"
+
+        - name: "RootOMMap"
+          section: "PEDOTRANSFER"
+          label: "Organic Matter Rootzone (%)"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          default: "root_om.map"
+          depends_on: "PedotransferFLAG"
+
+        - name: "RootBulkMap"
+          section: "PEDOTRANSFER"
+          label: "Bulk Density Rootzone (-)"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          default: "root_bd.map"
+          depends_on: "PedotransferFLAG"
+
+        - name: "SubSandMap"
+          section: "PEDOTRANSFER"
+          label: "Sand Subsoil (%)"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          default: "sub_sand.map"
+          depends_on: "PedotransferFLAG"
+
+        - name: "SubClayMap"
+          section: "PEDOTRANSFER"
+          label: "Clay Subsoil (%)"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          default: "sub_clay.map"
+          depends_on: "PedotransferFLAG"
+
+        - name: "SubOMMap"
+          section: "PEDOTRANSFER"
+          label: "Organic Matter Subsoil (%)"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          default: "sub_om.map"
+          depends_on: "PedotransferFLAG"
+
+        - name: "SubBulkMap"
+          section: "PEDOTRANSFER"
+          label: "Bulk Density Subzone (-)"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          default: "sub_bd.map"
+          depends_on: "PedotransferFLAG"
+
+  soil_parameters:
+    label: "Soil Parameters"
+    parameters:
+      - name: soil_initial_conditions
+        type: group_box
+        label: Initial Soil Conditions
+        parameters:
+        - name: "RootWater"
+          section: "SOIL_INIT"
+          label: "Initial Rootzone Water Content (mm)"
+          type: "scalar"
+          default: "50"
+
+        - name: "SubWater"
+          section: "SOIL_INIT"
+          label: "Initial Subsoil Water Content (mm)"
+          type: "scalar"
+          default: "10"
+
+        - name: "CapRise"
+          section: "SOIL_INIT"
+          label: "Initial Capillary Rise (mm)"
+          type: "scalar"
+          default: "0"
+
+        - name: "RootDrain"
+          section: "SOIL_INIT"
+          label: "Initial Rootzone Drainage (mm)"
+          type: "scalar"
+          default: "0"
+
+        - name: "SubDrain"
+          section: "SOIL_INIT"
+          label: "Initial Subsoil Drainage (mm)"
+          type: "scalar"
+          default: "0"
+
+      - name: soil_calibration
+        type: group_box
+        label: Rootzone Calibration Parameters
+        parameters:
+        - name: "RootFieldFrac"
+          section: "SOIL_CAL"
+          label: "Multplication Factor Field Capacity (-)"
+          type: "scalar"
+          default: "1"
+
+        - name: "RootSatFrac"
+          section: "SOIL_CAL"
+          label: "Multplication Factor Saturated Water Content (-)"
+          type: "scalar"
+          default: "1"
+
+        - name: "RootDryFrac"
+          section: "SOIL_CAL"
+          label: "Multplication Factor Permanent Wilting Point (-)"
+          type: "scalar"
+          default: "1"
+
+        - name: "RootWiltFrac"
+          section: "SOIL_CAL"
+          label: "Multplication Factor Wilting Point (-)"
+          type: "scalar"
+          default: "1"
+
+        - name: "RootKsatFrac"
+          section: "SOIL_CAL"
+          label: "Multplication Factor Saturated Hydraulic Conductivity (-)"
+          type: "scalar"
+          default: "1"
+
+        - name: "Anisotropy"
+          section: "SOIL_CAL"
+          label: "Anisotropy (-)"
+          type: "scalar"
+          default: "1"
+
+      - name: soil_parameters
+        type: group_box
+        label: Soil Depth Parameters
+        parameters:
+        - name: "RootDepthFlat"
+          section: "SOILPARS"
+          label: "Rootzone Depth (mm)"
+          type: "scalar"
+          default: "500"
+
+        - name: "SubDepthFlat"
+          section: "SOILPARS"
+          label: "Subsoil Depth (mm)"
+          type: "scalar"
+          default: "500"
+
+        - name: "CapRiseMax"
+          section: "SOILPARS"
+          label: "Maximum Allowed Capillary Rise (mm)"
+          type: "scalar"
+          default: "5"
+
+      - name: infiltration
+        type: group_box
+        label: Infiltration Parameters
+        parameters:
+        - name: "Infil_excess"
+          section: "INFILTRATION"
+          label: "Enable Infiltration Excess Runoff"
+          type: "flag"
+          default: false
+          checked:
+            disable: 
+              - "PrecInt"
+          unchecked:
+            enable: 
+              - "PrecInt"
+
+        - name: "Alpha"
+          section: "INFILTRATION"
+          label: "Fraction Daily Rainfall of Most Intense Hour (-)"
+          type: "scalar"
+          depends_on: "Infil_excess"
+          default: 0.25
+
+        - name: "Ksat_frac"
+          section: "INFILTRATION"
+          label: "Multiplyer for Effective Saturated Hydraulic Conductivity (-)"
+          type: "scalar"
+          depends_on: "Infil_excess"
+          default: 0.5
+
+        - name: "PavedFrac"
+          section: "INFILTRATION"
+          label: "Fraction of Surface Covered by Pavement (-)"
+          type: "file_input"
+          depends_on: "Infil_excess"
+          path_style: "relative"
+          extension: "*.tbl"
+          default: "landuse/paved.tbl"
+
+  groundwater:
+    label: "Groundwater"
+    parameters:
+      - name: groundwater_main
+        type: group_box
+        label: Groundwater Module
+        parameters:
+        - name: "GroundFLAG"
+          section: "MODULES"
+          label: "Enable Groundwater Module"
+          type: "flag"
+          default: false
+
+      - name: groundwater_parameters
+        type: group_box
+        depends_on: "GroundFLAG"
+        label: Groundwater Parameters
+        parameters:
+        - name: "GwDepth"
+          section: "GROUNDW_PARS"
+          label: "Groundwater Layer Thickness (mm)"
+          type: "scalar"
+          default: "2000"
+
+        - name: "GwSat"
+          section: "GROUNDW_PARS"
+          label: "Saturated Water Content Groundwater (mm)"
+          type: "scalar"
+          default: "200"
+
+        - name: "deltaGw"
+          section: "GROUNDW_PARS"
+          label: "Groundwater Recharge Delay Time (days)"
+          type: "scalar"
+          default: "50"
+
+        - name: "BaseThresh"
+          section: "GROUNDW_PARS"
+          label: "Baseflow Threshold (mm)"
+          type: "scalar"
+          default: "0"
+
+        - name: "alphaGw"
+          section: "GROUNDW_PARS"
+          label: "Baseflow Days (1/days)"
+          type: "scalar"
+          default: "0.1"
+
+        - name: "YieldGw"
+          section: "GROUNDW_PARS"
+          label: "Specific Aquifer Yield (m/m)"
+          type: "scalar"
+          default: "0.05"
+
+      - name: groundwater_seepage_parameters
+        type: group_box
+        label: Seepage Parameters
+        depends_on: "GroundFLAG"
+        parameters:
+        - name: "SeepStatic"
+          section: "SOILPARS"
+          label: "Enable Constant Seepage"
+          type: "flag"
+          # depends_on: "GroundFLAG"
+          default: false
+
+        - name: "Seepage"
+          section: "SOILPARS"
+          label: "Seepage (mm)"
+          type: "scalar"
+          depends_on: 
+            # - "GroundFLAG"
+            - "SeepStatic"
+          default: ""
+
+        - name: "GWL_base"
+          section: "SOILPARS"
+          label: "Average Groundwater Level (mm)"
+          type: "scalar"
+          depends_on: 
+            # - "GroundFLAG"
+            - "SeepStatic"
+          default: ""
+
+      - name: groundwater_initial
+        type: group_box
+        label: Initial Groundwater Conditions
+        depends_on: "GroundFLAG"
+        parameters:
+        - name: "GwRecharge"
+          section: "GROUNDW_INIT"
+          label: "Initial Groundwater Recharge (mm)"
+          type: "scalar"
+          default: "0"
+
+        - name: "BaseR"
+          section: "GROUNDW_INIT"
+          label: "Initial Baseflow (mm)"
+          type: "scalar"
+          default: "0"
+
+        - name: "Gw"
+          section: "GROUNDW_INIT"
+          label: "Initial Groundwater Storage (mm)"
+          type: "scalar"
+          default: "100"
+
+        - name: "H_gw"
+          section: "GROUNDW_INIT"
+          label: "Initial Groundwater Table Height (m)"
+          type: "scalar"
+          default: "2"
+
+  snow:
+    label: "Snow"
+    parameters:
+      - name: snow_main
+        type: group_box
+        label: Snow Module
+        parameters:
+        - name: "SnowFLAG"
+          section: "MODULES"
+          label: "Enable Snow Module"
+          type: "flag"
+          default: false
+
+      - name: snow_parameters
+        type: group_box
+        label: Snow Parameters
+        depends_on: "SnowFLAG"
+        parameters:
+        - name: "TCrit"
+          section: "SNOW"
+          label: "Critical Temperature Snow Temperature (°C)"
+          type: "scalar"
+          default: "-4"
+
+        - name: "SnowSC"
+          section: "SNOW"
+          label: "Storage Capacity of Snow Pack (mm/mm)"
+          type: "scalar"
+          default: "0.5"
+
+        - name: "DDFS"
+          section: "SNOW"
+          label: "Degree Day Factor for Snow (mm/°C)"
+          type: "scalar"
+          default: "4"
+
+      - name: snow_initial
+        type: group_box
+        label: Initial Conditions Snow
+        depends_on: "SnowFLAG"
+        parameters:
+        - name: "SnowIni"
+          section: "SNOW_INIT"
+          label: "Initial Snow Storage (mm)"
+          type: "scalar"
+          default: "0"
+
+        - name: "SnowWatStore"
+          section: "SNOW_INIT"
+          label: "Initial Water Storage Pack (mm)"
+          type: "scalar"
+          default: "0"
+
+  glacier:
+    label: "Glacier"
+    parameters:
+      - name: glacier_module
+        type: group_box
+        label: Glacier Module
+        parameters:
+        - name: "GlacFLAG"
+          section: "MODULES"
+          label: "Enable Glacier Module"
+          type: "flag"
+          default: false
+
+      - name: glacier_parameters
+        type: group_box
+        label: Glacier Parameters
+        depends_on: "GlacFLAG"
+        parameters:
+        - name: "GlacTable"
+          section: "GLACIER"
+          label: "Glacier Table"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.tbl"
+          default: "glacier.tbl"
+
+        - name: "ModelID"
+          section: "GLACIER"
+          label: "Model ID Map"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          default: "model_id.map"
+
+        - name: "GlacID"
+          section: "GLACIER"
+          label: "Glacier ID Map"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          default: "glacier_id.map"
+
+        - name: "DDFG"
+          section: "GLACIER"
+          label: "Degree Day Factor for Glacier (mm/°C)"
+          type: "scalar"
+          default: "4"
+
+        - name: "DDFDG"
+          section: "GLACIER"
+          label: "Degree Day Factor for Glacier Debris (mm/°C)"
+          type: "scalar"
+          default: "2"
+
+        - name: "GlacF"
+          section: "GLACIER"
+          label: "Fraction of Glacier Melt to Become Runoff (-)"
+          type: "scalar"
+          default: "0.548"
+
+        - name: "GlacID_flag"
+          section: "GLACIER"
+          label: "Enable Reporting per Glacier ID"
+          type: "flag"
+          default: false
+
+        - name: "GlacVars"
+          depends_on: 
+            - "GlacFLAG"
+            - "GlacID_flag"
+          section: "GLACIER"
+          label: "Fluxes to Report per Glacier ID"
+          type: "text_input"
+          default: "FRAC_GLAC,ICE_DEPTH,GLAC_T,Prec_GLAC,Rain_GLAC,Snow_GLAC,ActSnowMelt_GLAC,SnowStore_GLAC,SnowWatStore_GLAC,TotalSnowStore_GLAC,SnowR_GLAC,GlacMelt,GlacR,GlacPerc"
+
+        - name: "GlacRetreat"
+          section: "GLACIER"
+          label: "Enable Glacier Retreat"
+          type: "flag"
+          default: true
+
+        - name: "GlacID_memerror"
+          section: "GLACIER"
+          label: "Enable Memory Error"
+          type: "flag"
+          default: true
+
+        - name: "GlacUpdate"
+          section: "GLACIER"
+          label: ""
+          type: "composite_input"
+          default: "30,9"
+          components:
+            - name: "day"
+              label: "Day for Update of Glacier Fraction"
+              type: "text_input"
+              default: "30"
+              
+            - name: "month"
+              label: "Month for Update of Glacier Fraction"
+              type: "text_input"
+              default: "9"
+
+        - name: "TLapse"
+          section: "GLACIER"
+          label: "Monthly Lapse Rates Table"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.tbl"
+          default: "lapse_rates.tbl"
+
+  vegetation:
+    label: "Vegetation"
+    parameters:
+      - name: crop_coefficients
+        type: group_box
+        label: Crop Coefficients
+        parameters:
+        - name: "KCstatic"
+          section: "LANDUSE"
+          label: "Use Static Crop Coefficients"
+          type: "flag"
+          default: true
+          controls:
+            checked:
+              disable: 
+                - "KC"
+            unchecked:
+              enable: 
+                - "KC"
+
+        - name: "CropFac"
+          section: "LANDUSE"
+          label: "Crop Coefficient Table"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.tbl"
+          default: "landuse/kc.tbl"
+          depends_on: "KCstatic"
+
+        - name: "KC"
+          section: "LANDUSE"
+          label: "Crop Coefficient Time Series"
+          type: "combined_path"
+          default: "kc_folder/kc"
+
+      - name: vegetation_module
+        type: group_box
+        label: Vegetation Module
+        help_id: help_vegetation
+        parameters:
+        - name: "DynVegFLAG"
+          section: "MODULES"
+          label: "Enable Vegetation Module"
+          type: "flag"
+          default: false
+          controls:
+            checked:
+              disable: 
+                - "CropFac"
+                - "KCstatic"
+                - "KC"
+            unchecked:
+              enable: 
+                - "CropFac"
+                - "KCstatic"
+
+        - name: "NDVI"
+          depends_on: "DynVegFLAG"
+          section: "DYNVEG"
+          label: "NDVI Input File Sample"
+          type: "combined_path"
+          default: "ndvi_folder/ndvi"
+
+        - name: "NDVImax"
+          depends_on: "DynVegFLAG"
+          section: "DYNVEG"
+          label: "Maximum NDVI (-)"
+          type: "scalar"
+          default: "0.9"
+
+        - name: "NDVImin"
+          depends_on: "DynVegFLAG"
+          section: "DYNVEG"
+          label: "Minimum NDVI (-)"
+          type: "scalar"
+          default: "0.05"
+
+        - name: "NDVIbase"
+          depends_on: "DynVegFLAG"
+          section: "DYNVEG"
+          label: "NDVI Value for Missing Data (-)"
+          type: "scalar"
+          default: "0.15"
+
+        - name: "KCmax"
+          depends_on: "DynVegFLAG"
+          section: "DYNVEG"
+          label: "Maximum Crop Coefficient (-)"
+          type: "scalar"
+          default: "1.3"
+
+        - name: "KCmin"
+          depends_on: "DynVegFLAG"
+          section: "DYNVEG"
+          label: "Minimum Crop Coefficient (-)"
+          type: "scalar"
+          default: "0.2"
+
+        - name: "FPARmax"
+          depends_on: "DynVegFLAG"
+          section: "DYNVEG"
+          label: "Maximum fPAR (-)"
+          type: "scalar"
+          default: "0.95"
+
+        - name: "FPARmin"
+          depends_on: "DynVegFLAG"
+          section: "DYNVEG"
+          label: "Minimum fPAR (-)"
+          type: "scalar"
+          default: "0.001"
+
+        - name: "LAImax"
+          depends_on: "DynVegFLAG"
+          section: "DYNVEG"
+          label: "LAI Max Table"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.tbl"
+          default: "landuse/LAImax.tbl"
+        
+        - name: "Smax_model"
+          depends_on: "DynVegFLAG"
+          section: "DYNVEG"
+          label: "Select Maximum Canopy Storage Model"
+          type: "selection"
+          default: 1
+          options:
+            - label: "von Hoyningen-Huene (1981)"
+              value: 1
+            - label: "Aston (1979)"
+              value: 2
+
+        - name: smax_model_2
+          type: group_box
+          label: "Aston (1979)"
+          parameters:
+          - name: "Sinf"
+            depends_on: "DynVegFLAG"
+            section: "DYNVEG"
+            label: "Maximum Canopy Storage (mm)"
+            type: "scalar"
+            default: "2.09"
+
+          - name: "Kappa"
+            depends_on: "DynVegFLAG"
+            section: "DYNVEG"
+            label: "Exponent of Canopy Storage-LAI Relationship (-)"
+            type: "scalar"
+            default: "0.294"
+
+          - name: "Smax_table"
+            depends_on: "DynVegFLAG"
+            section: "DYNVEG"
+            label: "Maximum Canopy Storage Table"
+            type: "file_input"
+            path_style: "relative"
+            extension: "*.tbl"
+            default: "landuse/smax.tbl"
+
+      - name: plant_water_stress
+        type: group_box
+        label: Plant Water Stress
+        parameters:
+        - name: "PWS_FLAG"
+          section: "PWS"
+          label: "Enable Plant Water Stress"
+          type: "flag"
+          default: false
+
+        - name: "PFactor"
+          section: "PWS"
+          label: "Depletion Fraction Table"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.tbl"
+          depends_on: "PWS_FLAG"
+          default: "landuse/depletion.tbl"
+
+        - name: "RootingDepth"
+          section: "PWS"
+          label: "Maximum Rooting Depth Table"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.tbl"
+          depends_on: "PWS_FLAG"
+          default: "landuse/rooting_depth.tbl"
+
+        - name: "RootDepthFrac"
+          section: "PWS"
+          label: "Rooting Depth Calibration Parameter (-)"
+          type: "scalar"
+          depends_on: "PWS_FLAG"
+          default: 1
+
+  climate:
+    label: "Climate"
+    parameters:
+      - name: climate_main
+        type: group_box
+        help_id: help_climate
+        label: Main Climate Settings
+        parameters:
+        - name: "Prec"
+          section: "CLIMATE"
+          label: "Precipitation Input"
+          type: "combined_path"
+          default: "climate/prec"
+
+        - name: "Tair"
+          section: "CLIMATE"
+          label: "Average Temperature Input"
+          type: "combined_path"
+          default: "climate/tavg"
+
+        - name: "Tmin"
+          section: "ETREF"
+          label: "Minimum Temperature Input"
+          type: "combined_path"
+          default: "climate/tmin"
+
+        - name: "Tmax"
+          section: "ETREF"
+          label: "Maximum Temperature Input"
+          type: "combined_path"
+          default: "climate/tmax"
+
+      - name: climate_etref
+        type: group_box
+        label: Reference Evapotranspiration Settings
+        parameters:
+        - name: "ETREF_FLAG"
+          section: "ETREF"
+          label: "Enable Time Series Input for Reference ET"
+          type: "flag"
+          default: false
+          controls:
+            checked:
+              disable: 
+                - "Lat"
+                - "Gsc"
+                - "Tmin"
+                - "Tmax"
+            unchecked:
+              enable: 
+                - "Lat"
+                - "Gsc"
+                - "Tmin"
+                - "Tmax"
+
+        - name: "ETref"
+          section: "ETREF"
+          label: "Reference Evapotranspiration Input"
+          type: "combined_path"
+          depends_on: "ETREF_FLAG"
+          default: "climate/etref"
+
+        - name: "Lat"
+          section: "ETREF"
+          label: "Latitude Zones Map"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          default: "latitude.map"
+        
+        - name: "Gsc"
+          section: "ETREF"
+          label: "Solar Constant"
+          type: "scalar"
+          default: "0.0820"
+
+      - name: climate_netcdf
+        type: group_box
+        help_id: help_netcdf
+        label: NetCDF Settings
+        parameters:
+        - name: "NetcdfFLAG"
+          section: "NETCDF"
+          label: "Enable NetCDF"
+          type: "flag"
+          default: false
+
+        - name: "x_coord"
+          section: "NETCDF"
+          label: "Variable Name for X-coordinates"
+          type: "text_input"
+          depends_on: "NetcdfFLAG"
+          default: "rlon"
+          
+        - name: "y_coord"
+          section: "NETCDF"
+          label: "Variable Name for Y-coordinates"
+          type: "text_input"
+          depends_on: "NetcdfFLAG"
+          default: "rlat"
+
+        - name: "epsg_netcdf"
+          section: "NETCDF"
+          label: "EPSG Code NetCDF"
+          type: "text_input"
+          depends_on: "NetcdfFLAG"
+          default: "rotated"
+          
+        - name: "epsg_model"
+          section: "NETCDF"
+          label: "EPSG Code Model"
+          type: "text_input"
+          depends_on: "NetcdfFLAG"
+          default: "25830"
+
+        - name: climate_netcdf_prec
+          type: group_box
+          label: Precipitation
+          parameters:
+          - name: "precNetcdfFLAG"
+            section: "NETCDF"
+            label: "Enable Precipitation NetCDF"
+            type: "flag"
+            depends_on: "NetcdfFLAG"
+            default: false
+            controls:
+              checked:
+                disable: 
+                  - "Prec"
+              unchecked:
+                enable: 
+                  - "Prec"
+          - name: "precNetcdf"
+            section: "NETCDF"
+            label: "Precipitation NetCDF"
+            type: "file_input"
+            path_style: "full"
+            extension: "*.nc"
+            depends_on: "precNetcdfFLAG"
+            default: "precipitation.nc"
+
+          - name: "precNetcdfInput"
+            section: "NETCDF"
+            label: ""
+            type: "composite_input"
+            depends_on: "precNetcdfFLAG"
+            default: "precipitation,linear,1"
+            components:
+              - name: "variable"
+                label: "Precipitation Variable Name in NetCDF"
+                type: "text_input"
+                default: "precipitation"
+                
+              - name: "interpolation_method"
+                label: "Interpolation Method"
+                type: "selection"
+                options: ["linear", "cubic", "nearest"]
+                default: "linear"
+                
+              - name: "factor"
+                label: "Multplication Factor"
+                type: "scalar"
+                default: "1"
+
+        - name: climate_netcdf_tavg
+          type: group_box
+          label: Average Temperature
+          parameters:
+          - name: "tempNetcdfFLAG"
+            section: "NETCDF"
+            label: "Enable Average Temperature NetCDF"
+            type: "flag"
+            depends_on: "NetcdfFLAG"
+            default: false
+            controls:
+              checked:
+                disable: 
+                  - "Tair"
+              unchecked:
+                enable: 
+                  - "Tair"
+
+          - name: "tempNetcdf"
+            section: "NETCDF"
+            label: "Average Temperature NetCDF"
+            type: "file_input"
+            path_style: "full"
+            extension: "*.nc"
+            depends_on: "tempNetcdfFLAG"
+            default: "temperature.nc"
+
+          - name: "tempNetcdfInput"
+            section: "NETCDF"
+            label: ""
+            type: "composite_input"
+            depends_on: "tempNetcdfFLAG"
+            default: "temperature,cubic,1"
+            components:
+              - name: "variable"
+                label: "Average Temperature Variable Name in NetCDF"
+                type: "text_input"
+                default: "temperature"
+                
+              - name: "interpolation_method"
+                label: "Interpolation Method"
+                type: "selection"
+                options: ["linear", "cubic", "nearest"]
+                default: "cubic"
+                
+              - name: "factor"
+                label: "Multplication Factor"
+                type: "scalar"
+                default: "1"
+
+        - name: climate_netcdf_tmin
+          type: group_box
+          label: Minimum Temperature
+          parameters:
+          - name: "TminNetcdfFLAG"
+            section: "NETCDF"
+            label: "Enable Minimum Temperature NetCDF"
+            type: "flag"
+            default: false
+            depends_on: "NetcdfFLAG"
+            controls:
+              checked:
+                disable: 
+                  - "Tmin"
+              # unchecked:
+              #   enable: 
+              #     - "Tmin"
+
+          - name: "TminNetcdf"
+            section: "NETCDF"
+            label: "Minimum Temperature NetCDF"
+            type: "file_input"
+            path_style: "full"
+            extension: "*.nc"
+            depends_on: "TminNetcdfFLAG"
+            default: "tmin.nc"
+
+          - name: "TminNetcdfInput"
+            section: "NETCDF"
+            label: ""
+            type: "composite_input"
+            depends_on: "TminNetcdfFLAG"
+            default: "tmin,cubic,1"
+            components:
+              - name: "variable"
+                label: "Minimum Temperature Variable Name in NetCDF"
+                type: "text_input"
+                default: "tmin"
+                
+              - name: "interpolation_method"
+                label: "Interpolation Method"
+                type: "selection"
+                options: ["linear", "cubic", "nearest"]
+                default: "cubic"
+                
+              - name: "factor"
+                label: "Multplication Factor"
+                type: "scalar"
+                default: "1"
+
+        - name: climate_netcdf_tmax
+          type: group_box
+          label: Maximum Temperature
+          parameters:
+          - name: "TmaxNetcdfFLAG"
+            section: "NETCDF"
+            label: "Enable Maximum Temperature NetCDF"
+            type: "flag"
+            default: false
+            depends_on: "NetcdfFLAG"
+            controls:
+              checked:
+                disable: 
+                  - "Tmax"
+              # unchecked:
+              #   enable: 
+              #     - "Tair"
+
+          - name: "TmaxNetcdf"
+            section: "NETCDF"
+            label: "Maximum Temperature NetCDF"
+            type: "file_input"
+            path_style: "full"
+            extension: "*.nc"
+            depends_on: "TmaxNetcdfFLAG"
+            default: "tmax.nc"
+
+          - name: "TmaxNetcdfInput"
+            section: "NETCDF"
+            label: ""
+            type: "composite_input"
+            depends_on: "TmaxNetcdfFLAG"
+            default: "tmax,cubic,1"
+            components:
+              - name: "variable"
+                label: "Maximum Temperature Variable Name in NetCDF"
+                type: "text_input"
+                default: "tmax"
+                
+              - name: "interpolation_method"
+                label: "Interpolation Method"
+                type: "selection"
+                options: ["linear", "cubic", "nearest"]
+                default: "cubic"
+                
+              - name: "factor"
+                label: "Multplication Factor"
+                type: "scalar"
+                default: "1"
+
+  routing:
+    label: "Routing"
+    parameters:
+      - name: routing_simple
+        type: group_box
+        label: Routing Module
+        parameters:
+        - name: "RoutFLAG"
+          section: "MODULES"
+          label: "Enable Routing Module"
+          type: "flag"
+          default: false
+
+        - name: "flowdir"
+          section: "ROUTING"
+          label: "Local Drainage Direction Map"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          depends_on: "RoutFLAG"
+          default: "ldd.map"
+
+      - name: routing_simple
+        type: group_box
+        label: Simple Routing
+        parameters:
+        - name: "kx"
+          section: "ROUTING"
+          label: "Recession Ceofficient"
+          type: "scalar"
+          depends_on: "RoutFLAG"
+          default: "0.5"
+
+        - name: "Rout_components"
+          section: "ROUTING"
+          label: "Enable Routing Individual Flow Components"
+          type: "flag"
+          depends_on: "RoutFLAG"
+          default: false
+
+      - name: routing_travel_time
+        type: group_box
+        label: Travel Time Routing
+        help_id: help_traveltime_routing
+        parameters:
+        - name: "travelTimeFLAG"
+          section: "ROUTING"
+          label: "Enable Travel Time Routing"
+          type: "flag"
+          depends_on: "RoutFLAG"
+          default: false
+          controls:
+            checked:
+              disable: 
+                - "kx"
+                - "Rout_components"
+                - "TC_beta"
+                - "TC_gamma"
+                - "depthTC"
+                - "manningChannelFLAG"
+                - "upstream_km2"
+                - "manningChannel"
+            unchecked:
+              enable: 
+                - "kx"
+                - "Rout_components"
+                - "TC_beta"
+                - "TC_gamma"
+                - "depthTC"
+                - "manningChannelFLAG"
+                - "upstream_km2"
+                - "manningChannel"
+      
+        - name: "kx_lat"
+          section: "ROUTING"
+          label: "Lateral Flow Recession Coefficient (-)"
+          type: "scalar"
+          depends_on: 
+            - "travelTimeFLAG"
+            - "RoutFLAG"
+          default: "1"
+
+        - name: "channelHillslope"
+          section: "ROUTING"
+          label: "Channel-Hillslope map"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          depends_on: 
+            - "travelTimeFLAG"
+            - "RoutFLAG"
+          default: "channel_hillslope.map"
+
+        - name: "channelWidth"
+          section: "ROUTING"
+          label: "Channel Width (m)"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          depends_on: 
+            - "travelTimeFLAG"
+            - "RoutFLAG"
+          default: "channel_width.map"
+      
+        - name: "channelDepth"
+          section: "ROUTING"
+          label: "Channel Depth (m)"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          depends_on: 
+            - "travelTimeFLAG"
+            - "RoutFLAG"
+          default: "channel_depth.map"
+      
+        - name: "floodplainWidth"
+          section: "ROUTING"
+          label: "Floodplain Width (m)"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          depends_on: 
+            - "travelTimeFLAG"
+            - "RoutFLAG"
+          default: "floodplain_width.map"
+      
+        - name: "channelManning"
+          section: "ROUTING"
+          label: "Channel Manning's Roughness (s m<sup>1/3</sup>)"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          depends_on: 
+            - "travelTimeFLAG"
+            - "RoutFLAG"
+          default: "0.045"
+      
+        - name: "floodplainManning"
+          section: "ROUTING"
+          label: "Floodplain Manning's Roughness (s m<sup>1/3</sup>)"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          depends_on: 
+            - "travelTimeFLAG"
+            - "RoutFLAG"
+          default: "0.2"
+      
+        - name: "rillWidth"
+          section: "ROUTING"
+          label: "Rill Width (m)"
+          type: "scalar"
+          depends_on: 
+            - "travelTimeFLAG"
+            - "RoutFLAG"
+          default: "0.3"
+      
+        - name: "rillDepth"
+          section: "ROUTING"
+          label: "Rill Depth (m)"
+          type: "scalar"
+          depends_on: 
+            - "travelTimeFLAG"
+            - "RoutFLAG"
+          default: "0.3"
+
+        - name: "rillManning"
+          section: "ROUTING"
+          label: "Rill Manning's Roughness (s m<sup>1/3</sup>)"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          depends_on: 
+            - "travelTimeFLAG"
+            - "RoutFLAG"
+          default: "0.045"
+      
+        - name: "channelSmooth"
+          section: "ROUTING"
+          label: "Number of Cells for Channel Smoothing Algorithm"
+          type: "scalar"
+          depends_on: 
+            - "travelTimeFLAG"
+            - "RoutFLAG"
+          default: "20"
+      
+        - name: "thresholdIteration"
+          section: "ROUTING"
+          label: "Threshold for Travel Time Iteration (m<sup>3</sup> s<sup>-1</sup>)"
+          type: "scalar"
+          depends_on: 
+            - "travelTimeFLAG"
+            - "RoutFLAG"
+          default: "0.01"
+      
+        - name: "maxIterations"
+          section: "ROUTING"
+          label: "Maximum Number of Iterations (-)"
+          type: "scalar"
+          depends_on: 
+            - "travelTimeFLAG"
+            - "RoutFLAG"
+          default: "100"
+      
+        - name: "inundationThreshold"
+          section: "ROUTING"
+          label: "Inundation Threshold (m)"
+          type: "scalar"
+          depends_on: 
+            - "travelTimeFLAG"
+            - "RoutFLAG"
+          default: "0.01"
+
+      - name: routing_initial
+        type: group_box
+        label: Initial Routing Conditions
+        parameters:      
+        - name: "QRA_init"
+          section: "ROUT_INIT"
+          label: "Initial Routed Total Runoff (m<sup>3</sup> s<sup>-1</sup>)"
+          type: "scalar"
+          depends_on: "RoutFLAG"
+          default: "0.001"
+      
+        - name: "RootRRA_init"
+          section: "ROUT_INIT"
+          label: "Initial Routed Surface Runoff (m<sup>3</sup> s<sup>-1</sup>)"
+          type: "scalar"
+          depends_on: "RoutFLAG"
+          default: "0.001"
+      
+        - name: "RootDRA_init"
+          section: "ROUT_INIT"
+          label: "Initial Routed Drainage Runoff (m<sup>3</sup> s<sup>-1</sup>)"
+          type: "scalar"
+          depends_on: "RoutFLAG"
+          default: "0.001"
+      
+        - name: "RainRA_init"
+          section: "ROUT_INIT"
+          label: "Initial Routed Rain Runoff (m<sup>3</sup> s<sup>-1</sup>)"
+          type: "scalar"
+          depends_on: "RoutFLAG"
+          default: "0.001"
+      
+        - name: "BaseRA_init"
+          section: "ROUT_INIT"
+          label: "Initial Routed Base Runoff (m<sup>3</sup> s<sup>-1</sup>)"
+          type: "scalar"
+          depends_on: "RoutFLAG"
+          default: "0.001"
+      
+        - name: "SnowRA_init"
+          section: "ROUT_INIT"
+          label: "Initial Routed Snow Runoff (m<sup>3</sup> s<sup>-1</sup>)"
+          type: "scalar"
+          depends_on: "RoutFLAG"
+          default: "0.001"
+      
+        - name: "GlacRA_init"
+          section: "ROUT_INIT"
+          label: "Initial Routed Glacier Runoff (m<sup>3</sup> s<sup>-1</sup>)"
+          type: "scalar"
+          depends_on: "RoutFLAG"
+          default: "0.001"
+      
+        - name: "H_init"
+          section: "ROUT_INIT"
+          label: "Initial Channel Water Depth (m)"
+          type: "scalar"
+          depends_on: 
+            - "travelTimeFLAG"
+            - "RoutFLAG"
+          default: "0.001"
+      
+  lake:
+    label: "Lakes"
+    parameters:
+      - name: lakes_module
+        type: group_box
+        label: Lake Module
+        depends_on: "RoutFLAG"
+        parameters:
+        - name: "LakeFLAG"
+          section: "MODULES"
+          label: "Enable Lake Module"
+          type: "flag"
+          default: false
+
+      - name: lakes_parameters
+        type: group_box
+        label: Lake Parameters
+        depends_on: 
+          - "LakeFLAG"
+          - "RoutFLAG"
+        parameters:
+        - name: "LakeId"
+          section: "LAKE"
+          label: "Lake ID Map"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          default: "lake_id.map"
+        
+        - name: "updatelakelevel"
+          section: "LAKE"
+          label: "Measured Lake Levels Map"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          default: "updatelakelevel.map"
+        
+        - name: "LakeFile"
+          section: "LAKE"
+          label: "Lake Water Levels Time Series"
+          type: "combined_path"
+          default: "climate/level"
+
+        - name: "LakeStor"
+          section: "LAKE"
+          label: "Lake Storage Table"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.tbl"
+          default: "lake_storage.tbl"
+        
+        - name: "LakeFunc"
+          section: "LAKE"
+          label: "Lake Functions Table"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.tbl"
+          default: "lake_function.tbl"
+        
+        - name: "LakeQH"
+          section: "LAKE"
+          label: "Lake QH-parameters Table"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.tbl"
+          default: "lake_qh.tbl"
+        
+        - name: "LakeSH"
+          section: "LAKE"
+          label: "Lake SH-parameters Table"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.tbl"
+          default: "lake_sh.tbl"
+        
+        - name: "LakeHS"
+          section: "LAKE"
+          label: "Lake HS-parameters Table"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.tbl"
+          default: "lake_hs.tbl"
+      
+  reservoir:
+    label: "Reservoirs"
+    parameters:
+      - name: reservoir_module
+        type: group_box
+        label: Reservoir Module
+        depends_on: "RoutFLAG"
+        parameters:
+        - name: "ResFLAG"
+          section: "MODULES"
+          label: "Enable Reservoir Module"
+          type: "flag"
+          default: false
+
+      - name: reservoir_parameters
+        type: group_box
+        label: Reservoir Parameters
+        depends_on: 
+          - "RoutFLAG"
+          - "ResFLAG"
+        parameters:
+        - name: "ResId"
+          section: "RESERVOIR"
+          label: "Reservoir ID Map"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          default: "res_id.map"
+
+        - name: "ResFuncStor"
+          section: "RESERVOIR"
+          label: "Reservoir Function and Storage Table"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.tbl"
+          default: "res_id.tbl"
+
+        - name: "ResSimple"
+          section: "RESERVOIR"
+          label: "Simple Reservoir Parameter Table"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.tbl"
+          default: "res_simple.tbl"
+        
+        - name: "ResAdv"
+          section: "RESERVOIR"
+          label: "Advanced Reservoir Parameter Table"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.tbl"
+          default: ""
+
+      - name: openwater
+        type: group_box
+        help_id: help_openwater
+        label: Open Water Evaporation
+        depends_on: 
+          - "ResFLAG"
+          - "RoutFLAG"
+        parameters:      
+        - name: "ETOpenWaterFLAG"
+          section: "OPENWATER"
+          label: "Enable Open Water Evaporation"
+          type: "flag"
+          default: false
+
+        - name: "kcOpenWater"
+          section: "OPENWATER"
+          label: "Crop Coefficient for Open Water"
+          type: "scalar"
+          depends_on: 
+            - "ETOpenWaterFLAG"
+          default: "1.2"
+
+        - name: "openWaterFrac"
+          section: "OPENWATER"
+          depends_on: 
+            - "ETOpenWaterFLAG"
+          label: "Fraction of Cell Covered by Water"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          default: "openwater_fraction.map"
+
+      - name: sediment_trapping
+        type: group_box
+        label: Sediment Trapping
+        help_id: help_reservoir_trapping
+        depends_on: 
+          - "ResFLAG"
+          - "ErosionFLAG"
+          - "SedTransFLAG"
+        parameters:      
+        - name: "TrapEffTab"
+          section: "SEDIMENT_TRANS"
+          label: "Reservoir Trapping Efficiency"
+          type: "file_input"
+          extension: "*.tbl"
+          default: "trapefftab.tbl"
+
+  irrigation:
+    label: "Irrigation"
+    parameters:
+      - name: irrigation_module
+        type: group_box
+        label: Irrigation Module
+        parameters:
+        - name: "IrrigationFLAG"
+          section: "IRRIGATION"
+          label: "Enable Irrigation Module"
+          type: "flag"
+          default: false
+
+      - name: irrigation_parameters
+        type: group_box
+        label: Irrigation Parameters
+        depends_on: "IrrigationFLAG"
+        parameters:
+        - name: "IrrigationTable"
+          section: "IRRIGATION"
+          label: "Irrigation Table"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.tbl"
+          default: "landuse/irrigation.tbl"
+
+  erosion:
+    label: "Erosion"
+    parameters:
+      - name: erosion_module
+        type: group_box
+        label: Erosion Module
+        parameters:
+        - name: "ErosionFLAG"
+          section: "MODULES"
+          label: "Enable Erosion Module"
+          type: "flag"
+          default: false
+
+      - name: erosion_parameters
+        type: group_box
+        label: Erosion Parameters
+        help_id: help_erosion
+        parameters:
+        - name: "ErosionModel"
+          section: "EROSION"
+          label: "Select Soil Erosion Model"
+          type: "selection"
+          options:
+          - label: "Morgan-Morgan-Finney (MMF)"
+            value: 2
+          - label: "MUSLE"
+            value: 1
+          depends_on: "ErosionFLAG"
+          default: 2
+  
+        - name: "RockFrac"
+          section: "EROSION"
+          label: "Rock Fraction (-)"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          depends_on: "ErosionFLAG"
+          default: "rock_fraction.map"
+
+        - name: "RoutedRunoffFLAG"
+          section: "EROSION"
+          label: "Enable Routed Runoff as Input"
+          depends_on: 
+            - "ErosionFLAG"
+            - "RoutFLAG"
+          type: "flag"
+          default: false
+
+        - name: "exclChannelsFLAG"
+          section: "EROSION"
+          label: "Exclude Channels in Erosion Calculation"
+          depends_on: 
+            - "ErosionFLAG"
+            - "RoutFLAG"
+            - "RoutedRunoffFLAG"
+          type: "flag"
+          default: false
+
+        - name: "upstream_km2_erosion"
+          section: "EROSION"
+          label: "Upstream Area for Definition of Channels (km<sup>2</sup>)"
+          type: "scalar"
+          depends_on: 
+            - "ErosionFLAG"
+            - "RoutFLAG"
+            - "RoutedRunoffFLAG"
+          default: 25
+
+      - name: erosion_mmf
+        type: group_box
+        label: Morgan-Morgan-Finney (MMF)
+        help_id: help_mmf
+        parameters:
+        - name: "MMF_table"
+          section: "MMF"
+          label: "MMF Table"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.tbl"
+          depends_on: "ErosionFLAG"
+          default: "landuse/mmf.tbl"
+
+        - name: "harvestFLAG"
+          section: "MMF"
+          label: "Enable Erosion After Harvest"
+          depends_on: "ErosionFLAG"
+          type: "flag"
+          default: false
+
+        - name: "MMF_harvest"
+          section: "MMF"
+          label: "MMF Harvest Table"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.tbl"
+          depends_on: 
+            - "ErosionFLAG"
+            - "harvestFLAG"
+          default: "landuse/mmf_harvest.tbl"
+
+        - name: "K_c"
+          section: "MMF"
+          label: "Detachability of Clay by Raindrop Impact (g mm<sup>-1</sup>)"
+          type: "scalar"
+          depends_on: "ErosionFLAG"
+          default: 0.1
+
+        - name: "K_z"
+          section: "MMF"
+          label: "Detachability of Silt by Raindrop Impact (g mm<sup>-1</sup>)"
+          type: "scalar"
+          depends_on: "ErosionFLAG"
+          default: 0.5
+
+        - name: "K_s"
+          section: "MMF"
+          label: "Detachability of Sand by Raindrop Impact (g mm<sup>-1</sup>)"
+          type: "scalar"
+          depends_on: "ErosionFLAG"
+          default: 0.3
+
+        - name: "DR_c"
+          section: "MMF"
+          label: "Detachability of Clay by Runoff (g mm<sup>-1</sup>)"
+          type: "scalar"
+          depends_on: "ErosionFLAG"
+          default: 1.0
+
+        - name: "DR_z"
+          section: "MMF"
+          label: "Detachability of Silt by Runoff (g mm<sup>-1</sup>)"
+          type: "scalar"
+          depends_on: "ErosionFLAG"
+          default: 1.6
+
+        - name: "DR_s"
+          section: "MMF"
+          label: "Detachability of Sand by Runoff (g mm<sup>-1</sup>)"
+          type: "scalar"
+          depends_on: "ErosionFLAG"
+          default: 1.5
+
+        - name: "manningBare"
+          section: "MMF"
+          label: "Bare Soil Roughness (s m<sup>1/3</sup>)"
+          type: "scalar"
+          depends_on: "ErosionFLAG"
+          default: 0.015
+
+        # - name: "RFR"
+        #   section: "MMF"
+        #   label: "Tilled Surface Roughness (cm m<sup>-1</sup>)"
+        #   type: "scalar"
+        #   depends_on: "ErosionFLAG"
+        #   default: 5
+
+        - name: "manningTillage"
+          section: "MMF"
+          label: "Tilled Surface Roughness (s m<sup>1/3</sup>)"
+          type: "scalar"
+          depends_on: "ErosionFLAG"
+          default: 0.045
+
+        - name: "PrecInt"
+          section: "MMF"
+          label: "Intensity of the Erosive Rain (mm h<sup>-1</sup>)"
+          type: "scalar"
+          depends_on: "ErosionFLAG"
+          default: 30
+
+        - name: "deltaClay"
+          section: "MMF"
+          label: "Partical Diameter of Clay (µm)"
+          type: "scalar"
+          depends_on: "ErosionFLAG"
+          default: 2
+
+        - name: "deltaSilt"
+          section: "MMF"
+          label: "Partical Diameter of Silt (µm)"
+          type: "scalar"
+          depends_on: "ErosionFLAG"
+          default: 50
+
+        - name: "deltaSand"
+          section: "MMF"
+          label: "Partical Diameter of Sand (µm)"
+          type: "scalar"
+          depends_on: "ErosionFLAG"
+          default: 500
+
+        - name: "deltaGravel"
+          section: "MMF"
+          label: "Partical Diameter of Gravel (µm)"
+          type: "scalar"
+          depends_on: 
+            - "ErosionFLAG"
+            - "MorphodynamicsFLAG"
+          default: 4500
+
+        - name: "rho"
+          section: "MMF"
+          label: "Flow Density (kg m<sup>-3</sup>)"
+          type: "scalar"
+          depends_on: "ErosionFLAG"
+          default: 1100
+
+        - name: "rho_s"
+          section: "MMF"
+          label: "Sediment Density (kg m<sup>-3</sup>)"
+          type: "scalar"
+          depends_on: "ErosionFLAG"
+          default: 2650
+
+        - name: "depthBare"
+          section: "MMF"
+          label: "Flow Depth for Sheet Erosion (m)"
+          type: "scalar"
+          depends_on: "ErosionFLAG"
+          default: 0.005
+
+        - name: "depthInField"
+          section: "MMF"
+          label: "Flow Depth for Rill Erosion (m)"
+          type: "scalar"
+          depends_on: "ErosionFLAG"
+          default: 0.05
+
+        - name: "eta"
+          section: "MMF"
+          label: "Fluid Viscosity (kg m<sup>-1</sup> s<sup>-1</sup>)"
+          type: "scalar"
+          depends_on: "ErosionFLAG"
+          default: 0.005
+
+      - name: erosion_musle
+        type: group_box
+        label: MUSLE
+        parameters:      
+        - name: "K_USLE"
+          section: "MUSLE"
+          label: "USLE K-factor Map"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          depends_on: "ErosionFLAG"
+          default: "K_USLE.map"
+        
+        - name: "P_USLE"
+          section: "MUSLE"
+          label: "USLE P-factor"
+          type: "file_input"
+          depends_on: "ErosionFLAG"
+          default: "1"
+
+        - name: "musle_table"
+          section: "MUSLE"
+          label: "MUSLE Table"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.tbl"
+          depends_on: "ErosionFLAG"
+          default: "landuse/musle.tbl"
+
+  sediment_transport:
+    label: "Sediment Transport"
+    parameters:
+      - name: sedtrans_module
+        type: group_box
+        label: Sediment Transport Module
+        depends_on: 
+          - "RoutFLAG"
+          - "ErosionFLAG"
+        parameters:
+        - name: "SedTransFLAG"
+          section: "MODULES"
+          label: "Enable Sediment Transport Module"
+          type: "flag"
+          default: false
+
+      - name: sedtrans_initial
+        type: group_box
+        label: Initial Conditions
+        depends_on: 
+          - "SedTransFLAG"
+          - "RoutFLAG"
+        parameters:
+        - name: "Sed_init"
+          section: "SEDIMENT_TRANS"
+          label: "Initial Routed Sediment Transport (ton day<sup>-1</sup>)"
+          type: "scalar"
+          depends_on: "SedTransFLAG"
+          default: 0
+
+      - name: sediment_transport_simple
+        type: group_box
+        label: Simple Routing
+        help_id: help_sediment_transport_simple
+        depends_on: 
+          - "SedTransFLAG"
+          - "RoutFLAG"
+        parameters:      
+        - name: "TC_beta"
+          section: "SEDIMENT_TRANS"
+          label: "Beta Parameter (-)"
+          type: "scalar"
+          default: 1.4
+
+        - name: "TC_gamma"
+          section: "SEDIMENT_TRANS"
+          label: "Gamma Parameter (-)"
+          type: "scalar"
+          default: 1.4
+
+        - name: "depthTC"
+          section: "SEDIMENT_TRANS"
+          label: "Flow Depth for Transport Capacity (m)"
+          type: "scalar"
+          default: 0.25
+
+        - name: "manningChannelFLAG"
+          section: "SEDIMENT_TRANS"
+          label: "Enable Channel Manning's Roughness"
+          type: "flag"
+          default: false
+
+        - name: "upstream_km2"
+          section: "SEDIMENT_TRANS"
+          label: "Upstream Area for Definition of Channels (km<sup>2</sup>)"
+          type: "scalar"
+          default: 25
+          depends_on: 
+          - "manningChannelFLAG"
+
+        - name: "manningChannel"
+          section: "SEDIMENT_TRANS"
+          label: "Channel Manning's Roughness (s m<sup>0.5</sup>)"
+          type: "scalar"
+          default: 0.045
+          depends_on: 
+          - "manningChannelFLAG"
+
+      - name: sediment_transport_traveltime
+        type: group_box
+        label: Travel Time Routing
+        help_id: help_sediment_transport_traveltime
+        depends_on: 
+          - "SedTransFLAG"
+          - "travelTimeFLAG"
+          - "RoutFLAG"
+        parameters:      
+        - name: "SedTransEquationRills"
+          section: "SEDIMENT_TRANS"
+          label: "Select Sediment Transport Equation for Rills"
+          type: "selection"
+          options:
+          - label: "Govers (1990)"
+            value: 1
+          - label: "Abrahams et al. (2001)"
+            value: 2
+          default: 1
+
+        - name: "omega_cr_Govers"
+          section: "SEDIMENT_TRANS"
+          label: "Critical Stream Power for Govers (1990) (kg m<sup>-1</sup> s<sup>-1</sup>)"
+          type: "scalar"
+          default: 0.4
+
+        - name: "Y_cr_Abrahams"
+          section: "SEDIMENT_TRANS"
+          label: "Critical Shields Parameter for Abrahams et al. (2001) (-)"
+          type: "scalar"
+          default: 0.06
+
+        - name: "SedTransEquation"
+          section: "SEDIMENT_TRANS"
+          label: "Select Sediment Transport Equation for Channels"
+          type: "selection"
+          options:
+          - label: "Yalin (1963)"
+            value: 1
+          - label: "Wong and Parker (2006)"
+            value: 2
+          - label: "Wilcock and Crowe (2003)"
+            value: 3
+          default: 1
+
+        - name: "Y_cr_Yalin"
+          section: "SEDIMENT_TRANS"
+          label: "Critical Shields Parameter for Yalin (1963) (-)"
+          type: "scalar"
+          default: 0.06
+
+        - name: "tau_c_Wong"
+          section: "SEDIMENT_TRANS"
+          label: "Effective Critical Shields Parameter for Wong and Parker (2006) (-)"
+          type: "scalar"
+          default: 0.0495
+
+        - name: "SedConcMax"
+          section: "SEDIMENT_TRANS"
+          label: "Maximum Allowable Sediment Concentration (g l<sup>-1</sup>)"
+          type: "scalar"
+          default: 1060
+
+  morphodynamics:
+    label: "Morphodynamics"
+    parameters:
+      - name: morphodynamics_module
+        type: group_box
+        label: Morphodynamics Module
+        depends_on: 
+          - "RoutFLAG"
+          - "SedTransFLAG"
+          - "travelTimeFLAG"
+        parameters:
+        - name: "MorphodynamicsFLAG"
+          section: "MODULES"
+          label: "Enable Morphodynamics Module"
+          type: "flag"
+          default: false
+
+      - name: morphodynamics_parameters
+        help_id: help_morphodynamics
+        type: group_box
+        label: Morphodynamics Parameters
+        depends_on: 
+          - "RoutFLAG"
+          - "SedTransFLAG"
+          - "travelTimeFLAG"
+          - "MorphodynamicsFLAG"
+        parameters:
+        - name: "channelClay"
+          section: "MORPHODYNAMICS"
+          label: "Percentage of Clay in Channel Bed (-)"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          default: "0.5"
+
+        - name: "channelSilt"
+          section: "MORPHODYNAMICS"
+          label: "Percentage of Silt in Channel Bed (-)"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          default: "0.5"
+
+        - name: "channelSand"
+          section: "MORPHODYNAMICS"
+          label: "Percentage of Sand in Channel Bed (-)"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          default: "30"
+
+        - name: "channelGravel"
+          section: "MORPHODYNAMICS"
+          label: "Percentage of Gravel in Channel Bed (-)"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          default: "69"
+
+        - name: "layerFraction"
+          section: "MORPHODYNAMICS"
+          label: "Active Layer Thickness Fraction (-)"
+          type: "scalar"
+          default: 0.1
+
+  conservation:
+    label: "Conservation"
+    parameters:
+      - name: conservation_module
+        type: group_box
+        label: Conservation Module
+        parameters:
+        - name: "ConservationFLAG"
+          section: "MODULES"
+          label: "Enable Conservation Module"
+          type: "flag"
+          default: false
+
+      - name: conservation_landuse_change
+        type: group_box
+        help_id: help_conservation_landuse_change
+        label: Land Use Change
+        depends_on: 
+          - "ConservationFLAG"
+        parameters:
+        - name: "landUseChangeFLAG"
+          section: "CONSERVATION"
+          label: "Enable Land Use Change"
+          type: "flag"
+          default: false
+        
+        - name: "LandUseChange"
+          section: "CONSERVATION"
+          label: "Land Use Change Map"
+          depends_on: "landUseChangeFLAG"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          default: "conservation/land_use_change.map"
+
+      - name: conservation_pedotransfer
+        type: group_box
+        help_id: help_conservation_pedotransfer
+        label: Improve Soil Properties
+        depends_on: 
+          - "ConservationFLAG"
+          - "PedotransferFLAG"
+        parameters:
+        - name: "changeOMFLAG"
+          section: "CONSERVATION"
+          label: "Enable Changes in Organic Matter"
+          type: "flag"
+          default: false
+        
+        - name: "changeOM"
+          section: "CONSERVATION"
+          label: "Relative Change in Organic Matter (%)"
+          depends_on: "changeOMFLAG"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          default: "conservation/change_om.map"
+
+        - name: "changeBDFLAG"
+          section: "CONSERVATION"
+          label: "Enable Changes in Bulk Density"
+          type: "flag"
+          default: false
+        
+        - name: "changeBD"
+          section: "CONSERVATION"
+          label: "Relative Change in Bulk Density (%)"
+          depends_on: "changeBDFLAG"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          default: "conservation/change_bd.map"
+
+      - name: conservation_vegetation_cover
+        type: group_box
+        label: Vegetation Cover
+        help_id: help_conservation_vegetation_cover
+        depends_on: 
+          - "ConservationFLAG"
+        parameters:
+        - name: "vegetationCoverFLAG"
+          section: "CONSERVATION"
+          label: "Enable Vegetation Cover"
+          type: "flag"
+          default: false
+        
+        - name: "vegetationCover"
+          section: "CONSERVATION"
+          label: "Vegetation Cover Map"
+          depends_on: "vegetationCoverFLAG"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          default: "conservation/vegetation_cover.map"
+
+        - name: "vegetationCover_table"
+          section: "CONSERVATION"
+          label: "Vegetation Cover Characteristics"
+          type: "file_input"
+          depends_on: "vegetationCoverFLAG"
+          path_style: "relative"
+          extension: "*.tbl"
+          default: "conservation/vegetation_cover.tbl"
+
+      - name: conservation_ponds
+        type: group_box
+        label: Ponds
+        help_id: help_conservation_ponds
+        depends_on: 
+          - "ConservationFLAG"
+        parameters:
+        - name: "pondsFLAG"
+          section: "CONSERVATION"
+          label: "Enable Ponds"
+          type: "flag"
+          default: false
+        
+        - name: "ponds"
+          section: "CONSERVATION"
+          label: "Ponds Map"
+          depends_on: "pondsFLAG"
+          type: "file_input"
+          path_style: "relative"
+          extension: "*.map"
+          default: "conservation/ponds.map"
+
+        - name: "ponds_table"
+          section: "CONSERVATION"
+          label: "Ponds Characteristics"
+          type: "file_input"
+          depends_on: "pondsFLAG"
+          path_style: "relative"
+          extension: "*.tbl"
+          default: "conservation/ponds.tbl"
+
+        - name: "ReInfiltrationFLAG"
+          section: "CONSERVATION"
+          label: "Enable Re-infiltration into Ponds"
+          type: "flag"
+          default: false
+          depends_on: "pondsFLAG"
+        
+        - name: "ReInfil_b"
+          depends_on: 
+          - "ReInfiltrationFLAG"
+          - "pondsFLAG"
+          section: "CONSERVATION"
+          label: "Empirical Exponent for Relative Conductivity (-)"
+          type: "scalar"
+          default: 3
