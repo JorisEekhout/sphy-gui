@@ -7,7 +7,7 @@ A standalone PyQt-based Graphical User Interface for configuring, running, and a
 
 ---
 
-## Downloads & Installation
+## 🚀 Downloads & Installation
 
 Visit the [**Latest GitHub Release**](https://github.com/JorisEekhout/sphy-gui/releases/latest) to download the installer:
 
@@ -24,3 +24,29 @@ Visit the [**Latest GitHub Release**](https://github.com/JorisEekhout/sphy-gui/r
 
 ### Option B: Upgrading Existing Installations
 If you already have SPHY installed at `C:\SPHY_Model`, download and run **`SPHY_Update_v1.0.exe`** to apply code updates without re-downloading environment binaries.
+
+---
+
+## 💻 Running from Source
+
+If you prefer running the GUI directly within a custom Python environment:
+
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/JorisEekhout/sphy-gui.git](https://github.com/JorisEekhout/sphy-gui.git)
+   cd sphy-gui
+   ```
+
+2. **Set up dependencies:**
+   Ensure you have Python 3.12+ installed along with PyQt5 and model dependencies.
+
+3. **Launch the interface:**
+   ```bash
+   python main.py
+   ```
+
+---
+
+## 📄 Citation & License
+
+This project is distributed under the GNU General Public License v3.0. See `LICENSE` for details.
