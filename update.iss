@@ -1,5 +1,4 @@
 #define MyAppName "SPHY_Model"
-#define MyAppVersion "1.1" ; Bumped version for the update
 #define MyAppPublisher "Joris Eekhout/University of Murcia & CEBAS-CSIC"
 #define MyAppExeName "launch.vbs"
 
@@ -19,8 +18,6 @@ DisableReadyPage=yes
 
 ; --- Where the installer is built ---
 SourceDir=G:\Otros ordenadores\Mi PC\data_analysis\python\sphy-gui\SPHY_Installer_Build\
-OutputDir=..\
-OutputBaseFilename=SPHY_Update_v1.1
 Compression=lzma
 SolidCompression=yes
 
